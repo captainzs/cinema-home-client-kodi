@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window type="dialog">
+    <controls>
+        <control type="group">
+            <description>
+                Season Details
+            </description>
+            <left>770</left>
+            <top>435</top>
+            <control type="group">
+                <description>
+                    Season Poster
+                </description>
+                <control type="image">
+                    <description>
+                        "All" ListItem's custom poster
+                    </description>
+                    <visible>!String.IsEqual(Container(190).ListItem(0).DBTYPE,season)</visible>
+                    <width>340</width>
+                    <height>489</height>
+                    <texture background="true">$INFO[Container(190).ListItem(0).Art(poster)]</texture>
+                    <aspectratio scalediffuse="true" align="right" aligny="top">keep</aspectratio>
+                </control>
+                <control type="group">
+                    <visible>String.IsEmpty(Window.Property(Selected)) + String.IsEqual(Container(190).ListItem(0).DBTYPE,season)</visible>
+                    <control type="image">
+                        <visible>String.IsEqual(Container(190).ListItem(0).Property(IsAvailable),True)</visible>
+                        <width>340</width>
+                        <height>489</height>
+                        <texture background="true">$INFO[Container(190).ListItem(0).Art(poster)]</texture>
+                        <bordertexture>white.bmp</bordertexture>
+                        <bordersize>5</bordersize>
+                        <aspectratio scalediffuse="true" align="right" aligny="top">keep</aspectratio>
+                    </control>
+                    <control type="image">
+                        <visible>!String.IsEqual(Container(190).ListItem(0).Property(IsAvailable),True)</visible>
+                        <width>340</width>
+                        <height>489</height>
+                        <texture background="true" colordiffuse="77FFFFFF">$INFO[Container(190).ListItem(0).Art(poster)]</texture>
+                        <bordertexture colordiffuse="99FF0000">white.bmp</bordertexture>
+                        <bordersize>5</bordersize>
+                        <aspectratio scalediffuse="true" align="right" aligny="top">keep</aspectratio>
+                    </control>
+                </control>
+            </control>
+            <control type="label">
+                <description>
+                    Season Title
+                </description>
+                <visible>String.IsEmpty(Window.Property(Selected)) + !String.IsEmpty(Container(190).ListItem(0).Title)</visible>
+                <left>380</left>
+                <width>600</width>
+                <height>35</height>
+                <align>left</align>
+                <aligny>top</aligny>
+                <wrapmultiline>false</wrapmultiline>
+                <label>[B]$INFO[Container(190).ListItem(0).Title][/B]</label>
+                <font>font14</font>
+                <textcolor>FFFFFFFF</textcolor>
+            </control>
+            <control type="label">
+                <visible>String.IsEmpty(Window.Property(Selected)) + !String.IsEmpty(Container(190).ListItem(0).Property(SeasonNo))</visible>
+                <left>380</left>
+                <top>50</top>
+                <width>300</width>
+                <height>30</height>
+                <align>left</align>
+                <aligny>center</aligny>
+                <scroll>false</scroll>
+                <label>Season #$INFO[Container(190).ListItem(0).Property(SeasonNo)]</label>
+                <font>font13</font>
+                <textcolor>FFFFFFFF</textcolor>
+                <wrapmultiline>false</wrapmultiline>
+            </control>
+            <control type="label">
+                <visible>String.IsEmpty(Window.Property(Selected)) + !String.IsEmpty(Container(190).ListItem(0).Property(Aired))</visible>
+                <left>380</left>
+                <top>90</top>
+                <width>600</width>
+                <height>30</height>
+                <align>left</align>
+                <aligny>center</aligny>
+                <scroll>false</scroll>
+                <label>$INFO[Container(190).ListItem(0).Property(Aired)]</label>
+                <font>font13</font>
+                <textcolor>FFFFFFFF</textcolor>
+                <wrapmultiline>false</wrapmultiline>
+            </control>
+            <control type="label">
+                <visible>String.IsEmpty(Window.Property(Selected)) + !String.IsEmpty(Container(190).ListItem(0).Property(EpisodesCount))</visible>
+                <left>380</left>
+                <top>130</top>
+                <width>600</width>
+                <height>30</height>
+                <align>left</align>
+                <aligny>center</aligny>
+                <scroll>false</scroll>
+                <label>$INFO[Container(190).ListItem(0).Property(EpisodesCount)] episodes</label>
+                <font>font13</font>
+                <textcolor>FFFFFFFF</textcolor>
+                <wrapmultiline>false</wrapmultiline>
+            </control>
+            <control type="textbox">
+                <description>
+                    Season Plot
+                </description>
+                <visible>String.IsEmpty(Window.Property(Selected)) + !String.IsEmpty(Container(190).ListItem(0).Plot)</visible>
+                <left>380</left>
+                <top>175</top>
+                <width>600</width>
+                <height>364</height>
+                <align>left</align>
+                <font>font13</font>
+                <textcolor>FFFFFFFF</textcolor>
+                <autoscroll delay="4000" time="2500" repeat="8000">true</autoscroll>
+                <scrolltime>200</scrolltime>
+                <label>$INFO[Container(190).ListItem(0).Plot]</label>
+            </control>
+        </control>
+        <control type="list" id="190">
+            <visible>String.IsEmpty(Window.Property(Selected))</visible>
+            <left>220</left>
+            <top>420</top>
+            <width>450</width>
+            <height>645</height>
+            <orientation>vertical</orientation>
+            <itemlayout height="70">
+                <control type="label">
+                    <left>20</left>
+                    <top>15</top>
+                    <width>300</width>
+                    <height>30</height>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <scroll>true</scroll>
+                    <wrapmultiline>false</wrapmultiline>
+                    <label>$INFO[ListItem.Title]</label>
+                    <font>font13</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                </control>
+                <control type="label">
+                    <left>330</left>
+                    <top>15</top>
+                    <width>100</width>
+                    <height>30</height>
+                    <align>right</align>
+                    <aligny>center</aligny>
+                    <scroll>false</scroll>
+                    <wrapmultiline>false</wrapmultiline>
+                    <label>$INFO[ListItem.Year]</label>
+                    <font>font13</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                </control>
+            </itemlayout>
+            <focusedlayout height="70">
+                <control type="label">
+                    <left>20</left>
+                    <top>15</top>
+                    <height>30</height>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <scroll>false</scroll>
+                    <wrapmultiline>false</wrapmultiline>
+                    <label>$INFO[ListItem.Title]</label>
+                    <font>font13</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                </control>
+                <control type="label">
+                    <left>330</left>
+                    <top>15</top>
+                    <width>100</width>
+                    <height>30</height>
+                    <align>right</align>
+                    <aligny>center</aligny>
+                    <scroll>false</scroll>
+                    <wrapmultiline>false</wrapmultiline>
+                    <label>$INFO[ListItem.Year]</label>
+                    <font>font13</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                </control>
+                <control type="image">
+                    <width>450</width>
+                    <height>60</height>
+                    <texture background="false">selection_frame.png</texture>
+                </control>
+            </focusedlayout>
+        </control>
+        <control type="group">
+            <description>
+                Single "ListItem" representation when one selected from list
+            </description>
+            <animation type="Visible" reversible="true">
+                <effect type="fade" start="100" end="80" time="300"/>
+            </animation>
+            <visible>!String.IsEmpty(Window.Property(Selected))</visible>
+            <control type="label">
+                <left>240</left>
+                <top>450</top>
+                <height>30</height>
+                <align>left</align>
+                <aligny>center</aligny>
+                <scroll>false</scroll>
+                <wrapmultiline>false</wrapmultiline>
+                <label>$INFO[Container(190).ListItem(0).Title]</label>
+                <font>font13</font>
+                <textcolor>FFFFFFFF</textcolor>
+            </control>
+            <control type="label">
+                <left>550</left>
+                <top>450</top>
+                <width>100</width>
+                <height>30</height>
+                <align>right</align>
+                <aligny>center</aligny>
+                <scroll>false</scroll>
+                <wrapmultiline>false</wrapmultiline>
+                <label>$INFO[Container(190).ListItem(0).Year]</label>
+                <font>font13</font>
+                <textcolor>FFFFFFFF</textcolor>
+            </control>
+            <control type="image">
+                <left>220</left>
+                <top>435</top>
+                <width>450</width>
+                <height>60</height>
+                <texture background="false">selection_frame.png</texture>
+            </control>
+        </control>
+    </controls>
+</window>

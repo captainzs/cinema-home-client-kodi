@@ -1,0 +1,18 @@
+# Kodi Media Center language file
+# Addon Name: Cinema Home
+# Addon id: script.cinema.home
+# Addon Provider: captainzs
+msgid ""
+msgstr ""
+
+msgctxt "#30000"
+msgid "Season"
+msgstr "Évad"
+
+msgctxt "#30001"
+msgid "Next Episode Coming"
+msgstr "Következő Rész"
+
+msgctxt "#30002"
+msgid "Next Season Coming"
+msgstr "Következő Évad"

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+    <controls>
+        <control type="label">
+            <left>0</left>
+            <top>0</top>
+            <width>100%</width>
+            <height>100%</height>
+            <align>center</align>
+            <aligny>center</aligny>
+            <scroll>false</scroll>
+            <label>LOGIN.....LOADING..........</label>
+            <font>font14</font>
+            <textcolor>FFFFFFFF</textcolor>
+            <wrapmultiline>false</wrapmultiline>
+        </control>
+    </controls>
+</window>

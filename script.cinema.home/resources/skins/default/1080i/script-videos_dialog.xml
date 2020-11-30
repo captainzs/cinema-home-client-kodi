@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window type="dialog">
+    <controls>
+        <control type="list" id="250">
+            <left>750</left>
+            <top>40</top>
+            <width>1170</width>
+            <height>100%</height>
+            <orientation>vertical</orientation>
+            <itemlayout height="310">
+                <control type="image">
+                    <left>5</left>
+                    <top>5</top>
+                    <width>490</width>
+                    <height>271</height>
+                    <texture background="false" fallback="fallbacks/video_thumb.png">$INFO[ListItem.Art(thumb)]</texture>
+                    <aspectratio scalediffuse="true" align="left" aligny="center">keep</aspectratio>
+                </control>
+                <control type="label">
+                    <left>530</left>
+                    <top>0</top>
+                    <height>35</height>
+                    <align>left</align>
+                    <aligny>top</aligny>
+                    <wrapmultiline>false</wrapmultiline>
+                    <scroll>true</scroll>
+                    <label>[B]$INFO[ListItem.Title][/B]</label>
+                    <font>font14</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                </control>
+                <control type="label">
+                    <visible>!String.IsEmpty(ListItem.Property(Type))</visible>
+                    <left>530</left>
+                    <top>50</top>
+                    <height>30</height>
+                    <align>left</align>
+                    <aligny>top</aligny>
+                    <scroll>false</scroll>
+                    <wrapmultiline>false</wrapmultiline>
+                    <label>[I]$INFO[ListItem.Property(Type)][/I]</label>
+                    <font>font13</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                </control>
+                <control type="label">
+                    <visible>!String.IsEmpty(ListItem.AudioLanguage)</visible>
+                    <left>530</left>
+                    <top>95</top>
+                    <height>30</height>
+                    <align>left</align>
+                    <aligny>top</aligny>
+                    <scroll>false</scroll>
+                    <wrapmultiline>false</wrapmultiline>
+                    <label>$INFO[ListItem.AudioLanguage]</label>
+                    <font>font13</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                </control>
+            </itemlayout>
+            <focusedlayout height="310">
+                <control type="image">
+                    <left>0</left>
+                    <top>0</top>
+                    <width>500</width>
+                    <height>281</height>
+                    <texture background="false" fallback="fallbacks/video_thumb.png">$INFO[ListItem.Art(thumb)]</texture>
+                    <bordertexture>white.bmp</bordertexture>
+                    <bordersize>5</bordersize>
+                    <aspectratio scalediffuse="true" align="left" aligny="center">keep</aspectratio>
+                </control>
+                <control type="label">
+                    <left>530</left>
+                    <top>0</top>
+                    <height>35</height>
+                    <align>left</align>
+                    <aligny>top</aligny>
+                    <wrapmultiline>false</wrapmultiline>
+                    <scroll>true</scroll>
+                    <label>[B]$INFO[ListItem.Title][/B]</label>
+                    <font>font14</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                </control>
+                <control type="label">
+                    <visible>!String.IsEmpty(ListItem.Property(Type))</visible>
+                    <left>530</left>
+                    <top>50</top>
+                    <height>30</height>
+                    <align>left</align>
+                    <aligny>top</aligny>
+                    <scroll>false</scroll>
+                    <wrapmultiline>false</wrapmultiline>
+                    <label>[I]$INFO[ListItem.Property(Type)][/I]</label>
+                    <font>font13</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                </control>
+                <control type="label">
+                    <visible>!String.IsEmpty(ListItem.AudioLanguage)</visible>
+                    <left>530</left>
+                    <top>95</top>
+                    <height>30</height>
+                    <align>left</align>
+                    <aligny>top</aligny>
+                    <scroll>false</scroll>
+                    <wrapmultiline>false</wrapmultiline>
+                    <label>$INFO[ListItem.AudioLanguage]</label>
+                    <font>font13</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                </control>
+            </focusedlayout>
+        </control>
+    </controls>
+</window>
