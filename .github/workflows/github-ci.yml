@@ -20,7 +20,7 @@ jobs:
         python-version: 2.7.18
         architecture: x64
     - run: pip install tox
-    - run: tox -c client-kodi/script.module.mock.xbmc
-    - run: tox -c client-kodi/script.module.cinema.home.youtube.dl
-    - run: tox -c client-kodi/script.module.cinema.home.gui
-    - run: tox -c client-kodi/script.cinema.home
+    - run: tox -c script.module.mock.xbmc
+    - run: tox -c script.module.cinema.home.youtube.dl
+    - run: tox -c script.module.cinema.home.gui
+    - run: tox -c script.cinema.home
