@@ -17,7 +17,7 @@ jobs:
     - uses: actions/checkout@v1
     - uses: actions/setup-python@v1
       with:
-        python-version: 3.8.2
+        python-version: 2.7.18
         architecture: x64
     - run: pip install tox
     - run: tox -c client-kodi/script.module.mock.xbmc
