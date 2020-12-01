@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window type="dialog">
+    <controls>
+        <control type="group">
+            <description>
+                Episode Details
+            </description>
+            <animation type="Conditional" condition="!Control.HasFocus(52)" reversible="true">
+                <effect type="fade" start="100" end="30" time="300"/>
+            </animation>
+            <control type="list" id="50">
+                <description>
+                    FAKE LIST with only the CURRENT EPISODE ITEM
+                    Fake is needed so that we can load textures in background
+                    Without it bigger textures did not displayed for the first focus
+                </description>
+                <left>0</left>
+                <top>0</top>
+                <width>100%</width>
+                <height>100%</height>
+                <orientation>horizontal</orientation>
+                <itemlayout width="1920">
+                </itemlayout>
+                <focusedlayout width="1920">
+                    <control type="image">
+                        <description>
+                            Episode Thumb
+                        </description>
+                        <visible>!String.IsEmpty(ListItem.Art(thumb))</visible>
+                        <left>755</left>
+                        <top>45</top>
+                        <width>500</width>
+                        <height>281</height>
+                        <texture background="true">$INFO[ListItem.Art(thumb)]</texture>
+                        <bordertexture>white.bmp</bordertexture>
+                        <bordersize>5</bordersize>
+                        <aspectratio scalediffuse="true" align="left" aligny="center">keep</aspectratio>
+                    </control>
+                    <control type="image">
+                        <description>
+                            Episode Poster as thumb
+                        </description>
+                        <visible>String.IsEmpty(ListItem.Art(thumb)) + !String.IsEmpty(ListItem.Art(poster))</visible>
+                        <left>755</left>
+                        <top>45</top>
+                        <width>500</width>
+                        <height>281</height>
+                        <texture background="true">$INFO[ListItem.Art(poster)]</texture>
+                        <bordertexture>white.bmp</bordertexture>
+                        <bordersize>5</bordersize>
+                        <aspectratio scalediffuse="true" align="center" aligny="center">scale</aspectratio>
+                    </control>
+                </focusedlayout>
+            </control>
+            <control type="label">
+                <description>
+                    Episode Title
+                </description>
+                <left>1280</left>
+                <top>40</top>
+                <width>600</width>
+                <height>35</height>
+                <align>left</align>
+                <aligny>top</aligny>
+                <wrapmultiline>false</wrapmultiline>
+                <scroll>true</scroll>
+                <label>[B]$INFO[Container(50).ListItem(0).Title][/B]</label>
+                <font>font14</font>
+                <textcolor>FFFFFFFF</textcolor>
+            </control>
+            <control type="grouplist">
+                <description>
+                    Episode Meta
+                </description>
+                <left>1280</left>
+                <top>95</top>
+                <width>640</width>
+                <height>30</height>
+                <itemgap>0</itemgap>
+                <orientation>horizontal</orientation>
+                <usecontrolcoords>true</usecontrolcoords>
+                <control type="label">
+                    <visible>!String.IsEmpty(Container(50).ListItem(0).Rating(averaged))</visible>
+                    <left>0</left>
+                    <top>0</top>
+                    <width>70</width>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <scroll>false</scroll>
+                    <label>$INFO[Container(50).ListItem(0).Rating(averaged)]</label>
+                    <font>font13</font>
+                    <textcolor>FFCBE354</textcolor>
+                    <wrapmultiline>false</wrapmultiline>
+                </control>
+                <control type="label">
+                    <visible>!String.IsEmpty(Container(50).ListItem(0).Property(Aired))</visible>
+                    <left>0</left>
+                    <top>0</top>
+                    <width>140</width>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <scroll>false</scroll>
+                    <label>$INFO[Container(50).ListItem(0).Property(Aired)]</label>
+                    <font>font13</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                    <wrapmultiline>false</wrapmultiline>
+                </control>
+            </control>
+            <control type="textbox">
+                <description>
+                    Episode Plot
+                </description>
+                <visible>!String.IsEmpty(Container(50).ListItem(0).Plot)</visible>
+                <left>1280</left>
+                <top>135</top>
+                <width>600</width>
+                <height>186</height>
+                <align>left</align>
+                <font>font13</font>
+                <textcolor>FFFFFFFF</textcolor>
+                <autoscroll delay="4000" time="2500" repeat="8000">true</autoscroll>
+                <scrolltime>200</scrolltime>
+                <label>$INFO[Container(50).ListItem(0).Plot]</label>
+            </control>
+        </control>
+        <control type="group">
+            <description>
+                Download All (whole season) button
+            </description>
+            <height>50</height>
+            <control type="group">
+                <left>770</left>
+                <top>362</top>
+                <control type="button" id="51">
+                    <visible>String.IsEqual(Window.Property(FullSeasonDownloadable),True)</visible>
+                    <width>39</width>
+                    <height>26</height>
+                    <texturefocus colordiffuse="FFCBE354">select_all.png</texturefocus>
+                    <texturenofocus colordiffuse="BBFFFFFF">select_all.png</texturenofocus>
+                    <label>Download Season</label>
+                    <wrapmultiline>false</wrapmultiline>
+                    <font>font12</font>
+                    <textcolor>BBFFFFFF</textcolor>
+                    <focusedcolor>FFFFFFFF</focusedcolor>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <textoffsetx>62</textoffsetx>
+                    <textoffsety>0</textoffsety>
+                    <textwidth>300</textwidth>
+                    <ondown>52</ondown>
+                </control>
+                <control type="button" id="51">
+                    <visible>!String.IsEqual(Window.Property(FullSeasonDownloadable),True)</visible>
+                    <width>39</width>
+                    <height>26</height>
+                    <texturefocus colordiffuse="FFFF0000">select_all.png</texturefocus>
+                    <texturenofocus colordiffuse="BBFF0000">select_all.png</texturenofocus>
+                    <label>Download Season</label>
+                    <wrapmultiline>false</wrapmultiline>
+                    <font>font12</font>
+                    <textcolor>BBFFFFFF</textcolor>
+                    <focusedcolor>FFFFFFFF</focusedcolor>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <textoffsetx>62</textoffsetx>
+                    <textoffsety>0</textoffsety>
+                    <textwidth>300</textwidth>
+                    <ondown>52</ondown>
+                </control>
+            </control>
+            <control type="image">
+                <animation type="Conditional" condition="!Control.HasFocus(51)" reversible="true">
+                    <effect type="fade" start="100" end="40" time="300"/>
+                </animation>
+                <left>755</left>
+                <top>350</top>
+                <width>400</width>
+                <height>50</height>
+                <texture background="false">selection_frame.png</texture>
+            </control>
+        </control>
+        <control type="label">
+            <left>755</left>
+            <top>418</top>
+            <height>25</height>
+            <align>left</align>
+            <aligny>top</aligny>
+            <wrapmultiline>false</wrapmultiline>
+            <label>Episodes ($INFO[Window.Property(EpisodesCount)]) :</label>
+            <font>font12</font>
+            <textcolor>FFFFFFFF</textcolor>
+        </control>
+        <control type="panel" id="52">
+            <left>750</left>
+            <top>475</top>
+            <width>800</width>
+            <autoscroll>false</autoscroll>
+            <onup>51</onup>
+            <itemlayout width="80" height="80">
+                <control type="image">
+                    <visible>String.IsEqual(ListItem.Property(IsDownloadable),True)</visible>
+                    <width>65</width>
+                    <height>65</height>
+                    <texture background="false" colordiffuse="55FFFFFF">circle.png</texture>
+                </control>
+                <control type="image">
+                    <visible>!String.IsEqual(ListItem.Property(IsDownloadable),True)</visible>
+                    <width>65</width>
+                    <height>65</height>
+                    <texture background="false" colordiffuse="55FF0000">circle.png</texture>
+                </control>
+                <control type="label">
+                    <width>65</width>
+                    <height>65</height>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                    <wrapmultiline>false</wrapmultiline>
+                    <label>$INFO[ListItem.Label]</label>
+                    <font>font12</font>
+                    <textcolor>AAFFFFFF</textcolor>
+                </control>
+            </itemlayout>
+            <focusedlayout width="80" height="80">
+                <control type="image">
+                    <visible>String.IsEqual(ListItem.Property(IsDownloadable),True)</visible>
+                    <width>65</width>
+                    <height>65</height>
+                    <texture background="false" colordiffuse="FFCBE354">circle.png</texture>
+                </control>
+                <control type="image">
+                    <visible>!String.IsEqual(ListItem.Property(IsDownloadable),True)</visible>
+                    <width>65</width>
+                    <height>65</height>
+                    <texture background="false" colordiffuse="FFFF0000">circle.png</texture>
+                </control>
+                <control type="label">
+                    <width>65</width>
+                    <height>65</height>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                    <wrapmultiline>false</wrapmultiline>
+                    <label>$INFO[ListItem.Label]</label>
+                    <font>font12</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                </control>
+            </focusedlayout>
+        </control>
+    </controls>
+</window>

@@ -1,0 +1,110 @@
+# Kodi Media Center language file
+# Addon Name: Cinema Home
+# Addon id: script.cinema.home
+# Addon Provider: captainzs
+msgid ""
+msgstr ""
+
+msgctxt "#30000"
+msgid "Season"
+msgstr "Season"
+
+msgctxt "#30001"
+msgid "Next Episode Coming"
+msgstr "Next Episode Coming"
+
+msgctxt "#30002"
+msgid "Next Season Coming"
+msgstr "Next Season Coming"
+
+msgctxt "#30003"
+msgid "None found"
+msgstr "None found"
+
+msgctxt "#30004"
+msgid "Unfortunately there are no videos for this film!"
+msgstr "Unfortunately there are no videos for this film!"
+
+msgctxt "#30005"
+msgid "Not available"
+msgstr "Not available"
+
+msgctxt "#30006"
+msgid "Unfortunately the season in one piece is not available right now!"
+msgstr "Unfortunately the season in one piece is not available right now!"
+
+msgctxt "#30007"
+msgid "Unfortunately this episode is not available right now!"
+msgstr "Unfortunately this episode is not available right now!"
+
+msgctxt "#30008"
+msgid "Unfortunately this season is not available right now!"
+msgstr "Unfortunately this season is not available right now!"
+
+msgctxt "#30009"
+msgid "Show all releases"
+msgstr "Show all releases"
+
+msgctxt "#30010"
+msgid "some episodes may be in different release order"
+msgstr "some episodes may be in different release order"
+
+msgctxt "#30011"
+msgid "Haven't found any film similar to this one! This must be so unique! You better watch it right now!"
+msgstr "Haven't found any film similar to this one! This must be so unique! You better watch it right now!"
+
+msgctxt "#30012"
+msgid "Unfortunately no releases found for this media!"
+msgstr "Unfortunately no releases found for this media!"
+
+msgctxt "#30013"
+msgid "Missing information"
+msgstr "Missing information"
+
+msgctxt "#30014"
+msgid "Incorrect information"
+msgstr "Incorrect information"
+
+msgctxt "#30015"
+msgid "Unreadable text"
+msgstr "Unreadable text"
+
+msgctxt "#30016"
+msgid "Download failure"
+msgstr "Download failure"
+
+msgctxt "#30017"
+msgid "Video failure"
+msgstr "Video failure"
+
+msgctxt "#30018"
+msgid "Other"
+msgstr "Other"
+
+msgctxt "#30019"
+msgid "Explain"
+msgstr "Explain"
+
+msgctxt "#30020"
+msgid "Choose an error type!"
+msgstr "Choose an error type!"
+
+msgctxt "#30021"
+msgid "Please explain the error!"
+msgstr "Please explain the error!"
+
+msgctxt "#30022"
+msgid "Timeout Error!"
+msgstr "Timeout Error!"
+
+msgctxt "#30023"
+msgid "Your request could not be loaded in time!"
+msgstr "Your request could not be loaded in time!"
+
+msgctxt "#30024"
+msgid "Cancel"
+msgstr "Cancel"
+
+msgctxt "#30025"
+msgid "Try again!"
+msgstr "Try again!"

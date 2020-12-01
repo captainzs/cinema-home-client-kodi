@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window type="dialog">
+    <controls>
+        <control type="image">
+            <description>
+                SHADOW on previous window
+            </description>
+            <animation type="WindowOpen" reversible="false">
+                <effect type="fade" start="0" end="50" time="200"/>
+            </animation>
+            <animation type="WindowClose" reversible="false">
+                <effect type="fade" start="50" end="0" time="200"/>
+            </animation>
+            <left>0</left>
+            <top>0</top>
+            <width>100%</width>
+            <height>100%</height>
+            <texture background="false" colordiffuse="FF000000">white.bmp</texture>
+        </control>
+        <control type="group">
+            <description>
+                Main Block
+            </description>
+            <animation type="WindowOpen" reversible="false">
+                <effect type="fade" start="50" end="100" time="200"/>
+                <effect type="zoom" center="auto" start="120,120" end="100,100" time="200"/>
+            </animation>
+            <animation type="WindowClose" reversible="false">
+                <effect type="fade" start="100" end="50" time="200"/>
+                <effect type="zoom" center="auto" start="100,100" end="120,120" time="200"/>
+            </animation>
+            <animation type="Conditional" condition="String.IsEqual(Window.Property(OnShowAll),True)" reversible="true">
+                <effect type="slide" start="0,0" end="0,-252" time="300"/>
+            </animation>
+            <control type="group">
+                <control type="image">
+                    <description>
+                        Shadow
+                    </description>
+                    <animation type="Conditional" condition="String.IsEqual(Window.Property(OnShowAll),True)" reversible="true">
+                        <effect type="zoom" start="100,100" end="100,200" time="300"/>
+                    </animation>
+                    <left>453</left>
+                    <top>257</top>
+                    <width>1024</width>
+                    <height>576</height>
+                    <texture background="false" colordiffuse="FF000000">white.bmp</texture>
+                </control>
+                <control type="image">
+                    <description>
+                        Foreground
+                    </description>
+                    <animation type="Conditional" condition="String.IsEqual(Window.Property(OnShowAll),True)" reversible="true">
+                        <effect type="zoom" start="100,100" end="100,200" time="300"/>
+                    </animation>
+                    <left>448</left>
+                    <top>252</top>
+                    <width>1024</width>
+                    <height>576</height>
+                    <texture background="false" colordiffuse="FF000A12">white.bmp</texture>
+                </control>
+            </control>
+            <control type="label">
+                <description>
+                    Header
+                </description>
+                <left>463</left>
+                <top>257</top>
+                <width>1004</width>
+                <height>35</height>
+                <align>center</align>
+                <aligny>center</aligny>
+                <wrapmultiline>false</wrapmultiline>
+                <scroll>false</scroll>
+                <label>[B]Recommended Release[/B]</label>
+                <font>font14</font>
+                <textcolor>FFFFFFFF</textcolor>
+            </control>
+            <control type="image">
+                <description>
+                    Divider Line
+                </description>
+                <left>478</left>
+                <top>302</top>
+                <width>994</width>
+                <height>2</height>
+                <texture background="false" colordiffuse="FFCBE354">white.bmp</texture>
+            </control>
+            <control type="label">
+                <description>
+                    Torrent Title
+                </description>
+                <left>463</left>
+                <top>321</top>
+                <width>1004</width>
+                <height>25</height>
+                <align>center</align>
+                <aligny>center</aligny>
+                <wrapmultiline>false</wrapmultiline>
+                <scroll>false</scroll>
+                <label>[I]$INFO[Container(110).ListItem(0).Label][/I]</label>
+                <font>font12</font>
+                <textcolor>FFFFFFFF</textcolor>
+            </control>
+            <control type="image">
+                <description>
+                    Flag
+                </description>
+                <visible>!String.IsEmpty(Container(110).ListItem(0).Property(FlagFile))</visible>
+                <left>478</left>
+                <top>370</top>
+                <width>256</width>
+                <height>218</height>
+                <texture background="false">flags/$INFO[Container(110).ListItem(0).Property(FlagFile)]</texture>
+            </control>
+            <control type="image">
+                <visible>String.IsEqual(Container(110).ListItem(0).Property(SeedsError),True)</visible>
+                <left>596</left>
+                <top>600</top>
+                <width>30</width>
+                <height>30</height>
+                <texture background="false" colordiffuse="FFEF5350">timer.png</texture>
+            </control>
+            <control type="grouplist">
+                <left>760</left>
+                <top>375</top>
+                <itemgap>12</itemgap>
+                <orientation>vertical</orientation>
+                <usecontrolcoords>true</usecontrolcoords>
+                <control type="label">
+                    <width>1009</width>
+                    <height>30</height>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <wrapmultiline>false</wrapmultiline>
+                    <scroll>false</scroll>
+                    <label>Size: [B]$INFO[Container(110).ListItem(0).Property(Size)][/B]</label>
+                    <font>font13</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                </control>
+                <control type="label">
+                    <width>1009</width>
+                    <height>30</height>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <wrapmultiline>false</wrapmultiline>
+                    <scroll>false</scroll>
+                    <label>Video: [B]$INFO[Container(110).ListItem(0).Property(Resolution)][/B]</label>
+                    <font>font13</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                </control>
+                <control type="label">
+                    <width>1009</width>
+                    <height>30</height>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <wrapmultiline>false</wrapmultiline>
+                    <scroll>false</scroll>
+                    <label>Audio: $INFO[Container(110).ListItem(0).Property(Languages)]</label>
+                    <font>font13</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                </control>
+                <control type="label">
+                    <visible>String.IsEqual(Window.Property(OnShowAll),True) + !String.IsEmpty(Container(110).ListItem(0).Property(Channels))</visible>
+                    <width>1009</width>
+                    <height>30</height>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <wrapmultiline>false</wrapmultiline>
+                    <scroll>false</scroll>
+                    <label>Channels: $INFO[Container(110).ListItem(0).Property(Channels)]</label>
+                    <font>font13</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                </control>
+                <control type="label">
+                    <visible>String.IsEqual(Window.Property(OnShowAll),True) + !String.IsEmpty(Container(110).ListItem(0).Property(Sources))</visible>
+                    <width>1009</width>
+                    <height>30</height>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <wrapmultiline>false</wrapmultiline>
+                    <scroll>false</scroll>
+                    <label>Source: $INFO[Container(110).ListItem(0).Property(Sources)]</label>
+                    <font>font13</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                </control>
+                <control type="label">
+                    <visible>String.IsEqual(Window.Property(OnShowAll),True) + !String.IsEmpty(Container(110).ListItem(0).Property(Codecs))</visible>
+                    <width>1009</width>
+                    <height>30</height>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <wrapmultiline>false</wrapmultiline>
+                    <scroll>false</scroll>
+                    <label>Codecs: $INFO[Container(110).ListItem(0).Property(Codecs)]</label>
+                    <font>font13</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                </control>
+                <control type="group">
+                    <visible>!String.IsEmpty(Container(110).ListItem(0).Property(Warnings))</visible>
+                    <height>30</height>
+                    <control type="image">
+                        <width>30</width>
+                        <height>30</height>
+                        <texture background="false" colordiffuse="FFCBE354">report.png</texture>
+                    </control>
+                    <control type="label">
+                        <left>50</left>
+                        <width>1009</width>
+                        <height>30</height>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <wrapmultiline>false</wrapmultiline>
+                        <scroll>false</scroll>
+                        <label>$INFO[Container(110).ListItem(0).Property(Warnings)]</label>
+                        <font>font13</font>
+                        <textcolor>FFFFFFFF</textcolor>
+                    </control>
+                </control>
+            </control>
+            <control type="image">
+                <description>
+                    Divider Line 2
+                </description>
+                <left>710</left>
+                <top>700</top>
+                <width>500</width>
+                <height>2</height>
+                <texture background="false" colordiffuse="FFCBE354">white.bmp</texture>
+            </control>
+            <control type="group">
+                <visible>!String.IsEqual(Window.Property(OnShowAll),True)</visible>
+                <control type="button" id="11">
+                    <left>453</left>
+                    <top>728</top>
+                    <width>331</width>
+                    <height>100</height>
+                    <texturefocus colordiffuse="FFCBE354">selection_frame.png</texturefocus>
+                    <texturenofocus colordiffuse="44FFFFFF">selection_frame.png</texturenofocus>
+                    <label>Download</label>
+                    <wrapmultiline>false</wrapmultiline>
+                    <font>font13</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                    <focusedcolor>FFCBE354</focusedcolor>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                    <textoffsetx>15</textoffsetx>
+                    <textoffsety>0</textoffsety>
+                    <textwidth>301</textwidth>
+                    <onleft>13</onleft>
+                    <onright>12</onright>
+                </control>
+                <control type="button" id="12">
+                    <left>794</left>
+                    <top>728</top>
+                    <width>331</width>
+                    <height>100</height>
+                    <texturefocus colordiffuse="FFFFFFFF">selection_frame.png</texturefocus>
+                    <texturenofocus colordiffuse="44FFFFFF">selection_frame.png</texturenofocus>
+                    <label>$INFO[Window.Property(MediaPieceLabel)][CR]Releases</label>
+                    <wrapmultiline>false</wrapmultiline>
+                    <font>font13</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                    <focusedcolor>FFFFFFFF</focusedcolor>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                    <textoffsetx>15</textoffsetx>
+                    <textoffsety>0</textoffsety>
+                    <textwidth>301</textwidth>
+                    <onleft>11</onleft>
+                    <onright>13</onright>
+                    <onclick>SetProperty(OnShowAll,True)</onclick>
+                </control>
+                <control type="button" id="13">
+                    <left>1135</left>
+                    <top>728</top>
+                    <width>331</width>
+                    <height>100</height>
+                    <texturefocus colordiffuse="FFFFFFFF">selection_frame.png</texturefocus>
+                    <texturenofocus colordiffuse="44FFFFFF">selection_frame.png</texturenofocus>
+                    <label>Cancel</label>
+                    <wrapmultiline>false</wrapmultiline>
+                    <font>font13</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                    <focusedcolor>FFFFFFFF</focusedcolor>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                    <textoffsetx>15</textoffsetx>
+                    <textoffsety>0</textoffsety>
+                    <textwidth>301</textwidth>
+                    <onleft>12</onleft>
+                    <onright>11</onright>
+                    <onclick>Action(Back)</onclick>
+                </control>
+            </control>
+            <control type="list" id="110">
+                <visible>String.IsEqual(Window.Property(OnShowAll),True)</visible>
+                <left>453</left>
+                <top>728</top>
+                <width>1009</width>
+                <height>604</height>
+                <orientation>vertical</orientation>
+                <itemlayout height="70">
+                    <control type="image">
+                        <visible>String.IsEqual(ListItem.Property(SeedsError),True)</visible>
+                        <left>20</left>
+                        <top>15</top>
+                        <width>30</width>
+                        <height>30</height>
+                        <texture background="false" colordiffuse="FFEF5350">timer.png</texture>
+                    </control>
+                    <control type="label">
+                        <left>70</left>
+                        <top>15</top>
+                        <height>30</height>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <scroll>false</scroll>
+                        <wrapmultiline>false</wrapmultiline>
+                        <label>$INFO[ListItem.Label]</label>
+                        <font>font13</font>
+                        <textcolor>FFFFFFFF</textcolor>
+                    </control>
+                </itemlayout>
+                <focusedlayout height="70">
+                    <control type="image">
+                        <visible>String.IsEqual(ListItem.Property(SeedsError),True)</visible>
+                        <left>20</left>
+                        <top>15</top>
+                        <width>30</width>
+                        <height>30</height>
+                        <texture background="false" colordiffuse="FFEF5350">timer.png</texture>
+                    </control>
+                    <control type="label">
+                        <left>70</left>
+                        <top>15</top>
+                        <height>30</height>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <scroll>true</scroll>
+                        <wrapmultiline>false</wrapmultiline>
+                        <label>$INFO[ListItem.Label]</label>
+                        <font>font13</font>
+                        <textcolor>FFFFFFFF</textcolor>
+                    </control>
+                    <control type="image">
+                        <width>1009</width>
+                        <height>60</height>
+                        <texture background="false">selection_frame.png</texture>
+                    </control>
+                </focusedlayout>
+            </control>
+        </control>
+    </controls>
+</window>

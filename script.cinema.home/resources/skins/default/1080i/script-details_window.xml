@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+    <controls>
+        <control type="list" id="50">
+            <description>
+                FAKE LIST with only the CURRENT MEDIA ITEM
+                Fake is needed so that we can load textures in background
+                Without it bigger textures did not displayed for the first focus
+            </description>
+            <left>0</left>
+            <top>0</top>
+            <width>100%</width>
+            <height>100%</height>
+            <orientation>horizontal</orientation>
+            <itemlayout width="1920">
+            </itemlayout>
+            <focusedlayout width="1920">
+                <control type="group">
+                    <description>
+                        BACKGROUND
+                    </description>
+                    <animation type="Conditional" condition="String.IsEqual(ListItem.Property(OnMinimize),True)" reversible="true">
+                        <effect type="fade" start="100" end="10" time="300"/>
+                    </animation>
+                    <animation type="Conditional" condition="!String.IsEqual(ListItem.Property(OnMediaReady),True)" reversible="true">
+                        <effect type="fade" start="100" end="30" time="300"/>
+                    </animation>
+                    <animation type="Conditional" condition="!String.IsEqual(ListItem.Property(OnSqueeze),True) + String.IsEqual(ListItem.Property(OnMediaReady),True)" reversible="true">
+                        <effect type="zoom" start="100,100" end="158,158" time="400"/>
+                        <effect type="slide" start="0,0" end="-702,0" time="400"/>
+                    </animation>
+                    <control type="multiimage">
+                        <visible>!Player.Playing + !String.IsEmpty(ListItem.Art(landscape))</visible>
+                        <left>702</left>
+                        <top>0</top>
+                        <width>63.43%</width>
+                        <height>63.43%</height>
+                        <imagepath background="true">$INFO[ListItem.Art(landscape)]</imagepath>
+                        <timeperimage>1000</timeperimage>
+                        <fadetime>1000</fadetime>
+                        <pauseatend>1000</pauseatend>
+                        <randomize>true</randomize>
+                        <loop>yes</loop>
+                        <aspectratio scalediffuse="true" align="center" aligny="center">stretch</aspectratio>
+                    </control>
+                    <control type="videowindow">
+                        <left>702</left>
+                        <top>0</top>
+                        <width>63.43%</width>
+                        <height>63.43%</height>
+                    </control>
+                </control>
+                <control type="group">
+                    <description>
+                        BACKGROUND-DIFFUSES
+                    </description>
+                    <control type="image">
+                        <visible>String.IsEqual(ListItem.Property(OnSqueeze),True) | !String.IsEqual(ListItem.Property(OnMediaReady),True)</visible>
+                        <animation type="Visible" reversible="true">
+                            <effect type="fade" start="0" end="100" delay="300" time="400"/>
+                        </animation>
+                        <left>702</left>
+                        <top>0</top>
+                        <width>1218</width>
+                        <height>685</height>
+                        <texture background="false" colordiffuse="FF000000">diffuse_backg_white.png</texture>
+                        <aspectratio scalediffuse="true" align="center" aligny="center">stretch</aspectratio>
+                    </control>
+                    <control type="image">
+                        <visible>!String.IsEqual(ListItem.Property(OnSqueeze),True) + !String.IsEqual(ListItem.Property(OnVideoSaver),True)</visible>
+                        <animation type="Visible" reversible="true">
+                            <effect type="fade" start="0" end="100" delay="300" time="400"/>
+                        </animation>
+                        <left>0</left>
+                        <top>0</top>
+                        <width>100%</width>
+                        <height>100%</height>
+                        <texture background="false" colordiffuse="AA000000">diffuse_details_backg_white.png</texture>
+                        <aspectratio scalediffuse="true" align="center" aligny="center">stretch</aspectratio>
+                    </control>
+                </control>
+                <control type="image">
+                    <description>
+                        POSTER when no background available
+                    </description>
+                    <animation type="Conditional" condition="String.IsEqual(ListItem.Property(OnMinimize),True)" reversible="true">
+                        <effect type="fade" start="100" end="0" time="300"/>
+                    </animation>
+                    <animation type="Visible" reversible="true">
+                        <effect type="fade" start="0" end="100" time="600"/>
+                    </animation>
+                    <visible>!Player.Playing + String.IsEmpty(ListItem.Art(landscape)) + !String.IsEqual(ListItem.Property(OnSqueeze),True)</visible>
+                    <left>1200</left>
+                    <top>265</top>
+                    <width>452</width>
+                    <texture background="true">$INFO[ListItem.Art(poster)]</texture>
+                    <aspectratio scalediffuse="true" align="right" aligny="top">keep</aspectratio>
+                </control>
+                <control type="group">
+                    <description>
+                        TITLE
+                    </description>
+                    <animation type="Conditional" condition="!String.IsEqual(ListItem.Property(OnMediaReady),True)" reversible="true">
+                        <effect type="fade" start="100" end="30" time="300"/>
+                    </animation>
+                    <animation type="Conditional" condition="!String.IsEqual(ListItem.Property(TranslatedTitleNeeded),True)" reversible="true">
+                        <effect type="slide" start="0,0" end="0,30" time="0"/>
+                    </animation>
+                    <left>113</left>
+                    <top>15</top>
+                    <control type="image">
+                        <animation type="Conditional" condition="!String.IsEmpty(ListItem.Art(clearlogo))" reversible="false">
+                            <effect type="slide" start="250,0" end="0,0" delay="300" time="400"/>
+                            <effect type="fade" start="0" end="100" delay="300" time="400"/>
+                        </animation>
+                        <visible>!String.IsEmpty(ListItem.Art(clearlogo))</visible>
+                        <height>195</height>
+                        <texture background="true">$INFO[ListItem.Art(clearlogo)]</texture>
+                        <aspectratio scalediffuse="true" align="left" aligny="center">keep</aspectratio>
+                    </control>
+                    <control type="label">
+                        <visible>String.IsEmpty(ListItem.Art(clearlogo))</visible>
+                        <height>195</height>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <scroll>false</scroll>
+                        <wrapmultiline>false</wrapmultiline>
+                        <label>$INFO[ListItem.Title]</label>
+                        <font>font_skinversion</font>
+                        <textcolor>FFFFFFFF</textcolor>
+                    </control>
+                </control>
+                <control type="image">
+                    <description>
+                        Network Symbol
+                    </description>
+                    <animation type="Conditional" condition="!String.IsEqual(ListItem.Property(OnMediaReady),True)" reversible="true">
+                        <effect type="fade" start="100" end="30" time="300"/>
+                    </animation>
+                    <animation type="Conditional" condition="Player.Playing | String.IsEqual(ListItem.Property(OnMinimize),True)" reversible="true">
+                        <effect type="fade" start="100" end="0" time="300"/>
+                    </animation>
+                    <animation type="Conditional" condition="!String.IsEmpty(ListItem.Property(NetworkFileName))" reversible="true">
+                        <effect type="fade" start="0" end="90" delay="300" time="1000"/>
+                        <effect type="slide" tween="elastic" easing="out" start="250" end="0" delay="300" time="2000"/>
+                    </animation>
+                    <visible>!String.IsEmpty(ListItem.Property(NetworkFileName))</visible>
+                    <left>1700</left>
+                    <top>20</top>
+                    <width>180</width>
+                    <height>80</height>
+                    <texture background="true">networks/$INFO[ListItem.Property(NetworkFileName)]</texture>
+                    <aspectratio scalediffuse="true" align="right" aligny="top">keep</aspectratio>
+                </control>
+            </focusedlayout>
+        </control>
+        <control type="grouplist">
+            <description>
+                DETAILS
+            </description>
+            <animation type="Conditional" condition="!String.IsEqual(Container(50).ListItem(0).Property(OnMediaReady),True)" reversible="true">
+                <effect type="fade" start="100" end="30" time="300"/>
+            </animation>
+            <animation type="Conditional" condition="String.IsEqual(Container(50).ListItem(0).Property(OnVideoSaver),True) + String.IsEqual(Container(50).ListItem(0).Property(OnSqueeze),False)" reversible="true">
+                <effect type="fade" start="100" end="10" time="300"/>
+            </animation>
+            <left>113</left>
+            <top>215</top>
+            <width>1000</width>
+            <height>100%</height>
+            <itemgap>10</itemgap>
+            <orientation>vertical</orientation>
+            <usecontrolcoords>true</usecontrolcoords>
+            <control type="group">
+                <height>35</height>
+                <control type="label">
+                    <description>
+                        Translated Title
+                    </description>
+                    <visible>String.IsEqual(Container(50).ListItem(0).Property(TranslatedTitleNeeded),True)</visible>
+                    <left>0</left>
+                    <top>0</top>
+                    <width>500</width>
+                    <height>30</height>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <scroll>false</scroll>
+                    <wrapmultiline>false</wrapmultiline>
+                    <label>[I]$INFO[Container(50).ListItem(0).Title][/I]</label>
+                    <font>font13</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                </control>
+            </control>
+            <control type="grouplist">
+                <description>
+                    Meta Info Line
+                </description>
+                <visible>!String.IsEmpty(Container(50).ListItem(0).Rating(averaged)) | !String.IsEmpty(Container(50).ListItem(0).Year) | !String.IsEmpty(Container(50).ListItem(0).Duration)</visible>
+                <left>0</left>
+                <top>5</top>
+                <width>100%</width>
+                <height>40</height>
+                <itemgap>0</itemgap>
+                <orientation>horizontal</orientation>
+                <usecontrolcoords>true</usecontrolcoords>
+                <control type="image">
+                    <visible>!String.IsEmpty(Container(50).ListItem(0).Rating(averaged))</visible>
+                    <width>32</width>
+                    <height>33</height>
+                    <texture background="false" colordiffuse="FFCBE354">rate_like.png</texture>
+                </control>
+                <control type="label">
+                    <visible>!String.IsEmpty(Container(50).ListItem(0).Rating(averaged))</visible>
+                    <left>10</left>
+                    <top>0</top>
+                    <width>60</width>
+                    <height>30</height>
+                    <align>left</align>
+                    <aligny>top</aligny>
+                    <scroll>false</scroll>
+                    <label>$INFO[Container(50).ListItem(0).Rating(averaged)]</label>
+                    <font>font13</font>
+                    <textcolor>FFCBE354</textcolor>
+                    <wrapmultiline>false</wrapmultiline>
+                </control>
+                <control type="label">
+                    <visible>!String.IsEmpty(Container(50).ListItem(0).Year)</visible>
+                    <top>0</top>
+                    <width>80</width>
+                    <height>30</height>
+                    <align>left</align>
+                    <aligny>top</aligny>
+                    <scroll>false</scroll>
+                    <label>$INFO[Container(50).ListItem(0).Year]</label>
+                    <font>font13</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                    <wrapmultiline>false</wrapmultiline>
+                </control>
+                <control type="label">
+                    <visible>String.IsEqual(Container(50).ListItem(0).DBTYPE,movie) + !String.IsEmpty(Container(50).ListItem(0).Duration)</visible>
+                    <top>0</top>
+                    <height>30</height>
+                    <align>left</align>
+                    <aligny>top</aligny>
+                    <scroll>false</scroll>
+                    <label>$INFO[Container(50).ListItem(0).Duration(h)]h $INFO[Container(50).ListItem(0).Duration(m)]m</label>
+                    <font>font13</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                    <wrapmultiline>false</wrapmultiline>
+                </control>
+                <control type="label">
+                    <visible>String.IsEqual(Container(50).ListItem(0).DBTYPE,tvshow) + !String.IsEmpty(Container(50).ListItem(0).Property(SeasonsNo))</visible>
+                    <top>0</top>
+                    <width>155</width>
+                    <height>30</height>
+                    <align>left</align>
+                    <aligny>top</aligny>
+                    <scroll>false</scroll>
+                    <label>$INFO[Container(50).ListItem(0).Property(SeasonsNo)] seasons</label>
+                    <font>font13</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                    <wrapmultiline>false</wrapmultiline>
+                </control>
+                <control type="label">
+                    <visible>String.IsEqual(Container(50).ListItem(0).DBTYPE,tvshow) + !String.IsEmpty(Container(50).ListItem(0).Status)</visible>
+                    <top>0</top>
+                    <height>40</height>
+                    <align>left</align>
+                    <aligny>top</aligny>
+                    <scroll>false</scroll>
+                    <label>[I]$INFO[Container(50).ListItem(0).Status][/I]</label>
+                    <font>font13</font>
+                    <textcolor>FFEF9A9A</textcolor>
+                    <wrapmultiline>false</wrapmultiline>
+                </control>
+            </control>
+            <control type="label">
+                <description>
+                    TAGLINE
+                </description>
+                <visible>!String.IsEmpty(Container(50).ListItem(0).Tagline) + !String.IsEqual(Container(50).ListItem(0).Property(OnMinimize),True)</visible>
+                <height>35</height>
+                <align>left</align>
+                <aligny>top</aligny>
+                <scroll>false</scroll>
+                <label>[B]$INFO[Container(50).ListItem(0).Tagline][/B]</label>
+                <font>font14</font>
+                <textcolor>FFFFFFFF</textcolor>
+                <wrapmultiline>false</wrapmultiline>
+            </control>
+            <control type="textbox">
+                <description>
+                    PLOT
+                </description>
+                <visible>!String.IsEmpty(Container(50).ListItem(0).Plot) + !String.IsEqual(Container(50).ListItem(0).Property(OnMinimize),True)</visible>
+                <width>800</width>
+                <height>155</height>
+                <align>left</align>
+                <font>font14</font>
+                <textcolor>FFFFFFFF</textcolor>
+                <autoscroll delay="4000" time="2500" repeat="8000">true</autoscroll>
+                <scrolltime>200</scrolltime>
+                <label>$INFO[Container(50).ListItem(0).Plot]</label>
+            </control>
+            <control type="group">
+                <description>
+                    DIRECTOR(S) or CREATOR(s)
+                </description>
+                <visible>!String.IsEqual(Container(50).ListItem(0).Property(OnSqueeze),True) + !String.IsEqual(Container(50).ListItem(0).Property(OnMinimize),True) + !String.IsEmpty(Container(50).ListItem(0).Property(Creators))</visible>
+                <top>10</top>
+                <height>25</height>
+                <control type="label">
+                    <visible>String.IsEqual(Container(50).ListItem(0).DBTYPE,movie)</visible>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <scroll>false</scroll>
+                    <label>Directors: $INFO[Container(50).ListItem(0).Property(Creators)]</label>
+                    <font>font13</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                    <wrapmultiline>false</wrapmultiline>
+                </control>
+                <control type="label">
+                    <visible>String.IsEqual(Container(50).ListItem(0).DBTYPE,tvshow)</visible>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <scroll>false</scroll>
+                    <label>Creators: $INFO[Container(50).ListItem(0).Property(Creators)]</label>
+                    <font>font13</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                    <wrapmultiline>false</wrapmultiline>
+                </control>
+            </control>
+            <control type="label">
+                <visible>!String.IsEqual(Container(50).ListItem(0).Property(OnSqueeze),True) + !String.IsEqual(Container(50).ListItem(0).Property(OnMinimize),True) + !String.IsEmpty(Container(50).ListItem(0).Property(Actors))</visible>
+                <height>25</height>
+                <align>left</align>
+                <aligny>center</aligny>
+                <scroll>false</scroll>
+                <label>Cast: $INFO[Container(50).ListItem(0).Property(Actors)]</label>
+                <font>font13</font>
+                <textcolor>FFFFFFFF</textcolor>
+                <wrapmultiline>false</wrapmultiline>
+            </control>
+            <control type="label">
+                <visible>!String.IsEqual(Container(50).ListItem(0).Property(OnSqueeze),True) + !String.IsEqual(Container(50).ListItem(0).Property(OnMinimize),True) + !String.IsEmpty(Container(50).ListItem(0).Property(Genres))</visible>
+                <height>25</height>
+                <align>left</align>
+                <aligny>center</aligny>
+                <scroll>false</scroll>
+                <label>[CAPITALIZE][LOWERCASE][I]$INFO[Container(50).ListItem(0).Property(Genres)][/I][/LOWERCASE][/CAPITALIZE]</label>
+                <font>font13</font>
+                <textcolor>FFFFFFFF</textcolor>
+                <wrapmultiline>false</wrapmultiline>
+            </control>
+            <control type="grouplist">
+                <description>
+                    BUTTONS LIST
+                </description>
+                <animation type="Conditional" condition="!String.IsEmpty(Window.Property(OpenedMenuId))" reversible="true">
+                    <effect type="fade" start="100" end="80" time="300"/>
+                </animation>
+                <visible>!String.IsEqual(Container(50).ListItem(0).Property(OnSqueeze),True) + String.IsEqual(Container(50).ListItem(0).Property(OnMediaReady),True)</visible>
+                <left>45</left>
+                <top>25</top>
+                <height>395</height>
+                <itemgap>10</itemgap>
+                <orientation>vertical</orientation>
+                <usecontrolcoords>true</usecontrolcoords>
+                <control type="group">
+                    <description>
+                        DOWNLOAD
+                    </description>
+                    <visible>String.IsEmpty(Window.Property(OpenedMenuId)) | String.IsEqual(Window.Property(OpenedMenuId), 81)</visible>
+                    <height>60</height>
+                    <control type="button" id="81">
+                        <left>20</left>
+                        <top>15</top>
+                        <width>35</width>
+                        <height>30</height>
+                        <texturefocus colordiffuse="FFFFFFFF">download.png</texturefocus>
+                        <texturenofocus colordiffuse="DDFFFFFF">download.png</texturenofocus>
+                        <label>[B]Download[/B]</label>
+                        <wrapmultiline>false</wrapmultiline>
+                        <font>font13</font>
+                        <textcolor>DDFFFFFF</textcolor>
+                        <focusedcolor>FFFFFFFF</focusedcolor>
+                        <disabledcolor>DDFFFFFF</disabledcolor>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <textoffsetx>60</textoffsetx>
+                        <textoffsety>0</textoffsety>
+                        <textwidth>300</textwidth>
+                        <onclick condition="String.IsEqual(Container(50).ListItem(0).Property(OnMediaReady),True) + !String.IsEqual(Container(50).ListItem(0).Property(OnVideoSaver),True)">SetProperty(OpenedMenuId,81)</onclick>
+                        <ondown condition="String.IsEqual(Container(50).ListItem(0).Property(OnMediaReady),True) + !String.IsEqual(Container(50).ListItem(0).Property(OnVideoSaver),True)">82</ondown>
+                    </control>
+                    <control type="image">
+                        <visible>Control.HasFocus(81)</visible>
+                        <width>450</width>
+                        <height>60</height>
+                        <texture background="false">selection_frame.png</texture>
+                    </control>
+                </control>
+                <control type="group">
+                    <description>
+                        COLLECTION
+                    </description>
+                    <visible>[String.IsEmpty(Window.Property(OpenedMenuId)) | String.IsEqual(Window.Property(OpenedMenuId), 82)] + String.IsEqual(Container(50).ListItem(0).Property(HasCollection),True)</visible>
+                    <height>60</height>
+                    <control type="button" id="82">
+                        <left>20</left>
+                        <top>15</top>
+                        <width>35</width>
+                        <height>30</height>
+                        <texturefocus colordiffuse="FFFFFFFF">collection.png</texturefocus>
+                        <texturenofocus colordiffuse="DDFFFFFF">collection.png</texturenofocus>
+                        <label>[B]Collection[/B]</label>
+                        <wrapmultiline>false</wrapmultiline>
+                        <font>font13</font>
+                        <textcolor>DDFFFFFF</textcolor>
+                        <focusedcolor>FFFFFFFF</focusedcolor>
+                        <disabledcolor>DDFFFFFF</disabledcolor>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <textoffsetx>60</textoffsetx>
+                        <textoffsety>0</textoffsety>
+                        <textwidth>300</textwidth>
+                        <onclick condition="String.IsEqual(Container(50).ListItem(0).Property(OnMediaReady),True) + !String.IsEqual(Container(50).ListItem(0).Property(OnVideoSaver),True)">SetProperty(OpenedMenuId,82)</onclick>
+                        <onup condition="String.IsEqual(Container(50).ListItem(0).Property(OnMediaReady),True) + !String.IsEqual(Container(50).ListItem(0).Property(OnVideoSaver),True)">81</onup>
+                        <ondown condition="String.IsEqual(Container(50).ListItem(0).Property(OnMediaReady),True) + !String.IsEqual(Container(50).ListItem(0).Property(OnVideoSaver),True)">83</ondown>
+                    </control>
+                    <control type="image">
+                        <visible>Control.HasFocus(82)</visible>
+                        <width>450</width>
+                        <height>60</height>
+                        <texture background="false">selection_frame.png</texture>
+                    </control>
+                </control>
+                <control type="group">
+                    <description>
+                        MORE like this
+                    </description>
+                    <visible>String.IsEmpty(Window.Property(OpenedMenuId)) | String.IsEqual(Window.Property(OpenedMenuId), 83)</visible>
+                    <height>60</height>
+                    <control type="button" id="83">
+                        <left>20</left>
+                        <top>15</top>
+                        <width>35</width>
+                        <height>30</height>
+                        <texturefocus colordiffuse="FFFFFFFF">more.png</texturefocus>
+                        <texturenofocus colordiffuse="DDFFFFFF">more.png</texturenofocus>
+                        <label>[B]More like this[/B]</label>
+                        <wrapmultiline>false</wrapmultiline>
+                        <font>font13</font>
+                        <textcolor>DDFFFFFF</textcolor>
+                        <focusedcolor>FFFFFFFF</focusedcolor>
+                        <disabledcolor>DDFFFFFF</disabledcolor>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <textoffsetx>60</textoffsetx>
+                        <textoffsety>0</textoffsety>
+                        <textwidth>300</textwidth>
+                        <onclick condition="String.IsEqual(Container(50).ListItem(0).Property(OnMediaReady),True) + !String.IsEqual(Container(50).ListItem(0).Property(OnVideoSaver),True)">SetProperty(OpenedMenuId,83)</onclick>
+                        <onup condition="String.IsEqual(Container(50).ListItem(0).Property(OnMediaReady),True) + !String.IsEqual(Container(50).ListItem(0).Property(OnVideoSaver),True)">82</onup>
+                        <ondown condition="String.IsEqual(Container(50).ListItem(0).Property(OnMediaReady),True) + !String.IsEqual(Container(50).ListItem(0).Property(OnVideoSaver),True)">84</ondown>
+                    </control>
+                    <control type="image">
+                        <visible>Control.HasFocus(83)</visible>
+                        <width>450</width>
+                        <height>60</height>
+                        <texture background="false">selection_frame.png</texture>
+                    </control>
+                </control>
+                <control type="group">
+                    <description>
+                        Videos
+                    </description>
+                    <visible>[String.IsEmpty(Window.Property(OpenedMenuId)) | String.IsEqual(Window.Property(OpenedMenuId), 84)] + !String.IsEqual(Container(50).ListItem(0).Property(VideosNo),0)</visible>
+                    <height>60</height>
+                    <control type="button" id="84">
+                        <left>20</left>
+                        <top>15</top>
+                        <width>35</width>
+                        <height>30</height>
+                        <texturefocus colordiffuse="FFFFFFFF">videos.png</texturefocus>
+                        <texturenofocus colordiffuse="DDFFFFFF">videos.png</texturenofocus>
+                        <label>[B]Videos[/B]</label>
+                        <wrapmultiline>false</wrapmultiline>
+                        <font>font13</font>
+                        <textcolor>DDFFFFFF</textcolor>
+                        <focusedcolor>FFFFFFFF</focusedcolor>
+                        <disabledcolor>DDFFFFFF</disabledcolor>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <textoffsetx>60</textoffsetx>
+                        <textoffsety>0</textoffsety>
+                        <textwidth>300</textwidth>
+                        <onclick condition="String.IsEqual(Container(50).ListItem(0).Property(OnMediaReady),True) + !String.IsEqual(Container(50).ListItem(0).Property(OnVideoSaver),True)">SetProperty(OpenedMenuId,84)</onclick>
+                        <onup condition="String.IsEqual(Container(50).ListItem(0).Property(OnMediaReady),True) + !String.IsEqual(Container(50).ListItem(0).Property(OnVideoSaver),True)">83</onup>
+                        <ondown condition="String.IsEqual(Container(50).ListItem(0).Property(OnMediaReady),True) + !String.IsEqual(Container(50).ListItem(0).Property(OnVideoSaver),True)">85</ondown>
+                    </control>
+                    <control type="image">
+                        <visible>Control.HasFocus(84)</visible>
+                        <width>450</width>
+                        <height>60</height>
+                        <texture background="false">selection_frame.png</texture>
+                    </control>
+                </control>
+                <control type="group">
+                    <description>
+                        Favor
+                    </description>
+                    <visible>false</visible>
+                    <visible>String.IsEmpty(Window.Property(OpenedMenuId)) | String.IsEqual(Window.Property(OpenedMenuId), 85)</visible>
+                    <height>60</height>
+                    <control type="togglebutton" id="85">
+                        <left>20</left>
+                        <top>15</top>
+                        <width>35</width>
+                        <height>30</height>
+                        <texturefocus colordiffuse="FFFFFFFF">like.png</texturefocus>
+                        <texturenofocus colordiffuse="DDFFFFFF">like.png</texturenofocus>
+                        <alttexturefocus colordiffuse="FFFFFFFF">dislike.png</alttexturefocus>
+                        <alttexturenofocus colordiffuse="DDFFFFFF">dislike.png</alttexturenofocus>
+                        <usealttexture>String.IsEqual(Container(50).ListItem(0).Property(IsFavored),True)</usealttexture>
+                        <label>[B]Add to favorites[/B]</label>
+                        <altlabel>[B]Remove from favorites[/B]</altlabel>
+                        <font>font13</font>
+                        <wrapmultiline>false</wrapmultiline>
+                        <textcolor>DDFFFFFF</textcolor>
+                        <focusedcolor>FFFFFFFF</focusedcolor>
+                        <disabledcolor>DDFFFFFF</disabledcolor>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <textoffsetx>60</textoffsetx>
+                        <textoffsety>0</textoffsety>
+                        <textwidth>300</textwidth>
+                        <onup condition="String.IsEqual(Container(50).ListItem(0).Property(OnMediaReady),True) + !String.IsEqual(Container(50).ListItem(0).Property(OnVideoSaver),True)">84</onup>
+                        <ondown condition="String.IsEqual(Container(50).ListItem(0).Property(OnMediaReady),True) + !String.IsEqual(Container(50).ListItem(0).Property(OnVideoSaver),True)">86</ondown>
+                    </control>
+                    <control type="image">
+                        <visible>Control.HasFocus(85)</visible>
+                        <width>450</width>
+                        <height>60</height>
+                        <texture background="false">selection_frame.png</texture>
+                    </control>
+                </control>
+                <control type="group">
+                    <description>
+                        Report
+                    </description>
+                    <visible>String.IsEmpty(Window.Property(OpenedMenuId)) | String.IsEqual(Window.Property(OpenedMenuId), 86)</visible>
+                    <height>60</height>
+                    <control type="button" id="86">
+                        <left>20</left>
+                        <top>15</top>
+                        <width>35</width>
+                        <height>30</height>
+                        <texturefocus colordiffuse="FFFFFFFF">report.png</texturefocus>
+                        <texturenofocus colordiffuse="DDFFFFFF">report.png</texturenofocus>
+                        <label>[B]Report error[/B]</label>
+                        <wrapmultiline>false</wrapmultiline>
+                        <font>font13</font>
+                        <textcolor>DDFFFFFF</textcolor>
+                        <focusedcolor>FFFFFFFF</focusedcolor>
+                        <disabledcolor>DDFFFFFF</disabledcolor>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <textoffsetx>60</textoffsetx>
+                        <textoffsety>0</textoffsety>
+                        <textwidth>300</textwidth>
+                        <onup condition="String.IsEqual(Container(50).ListItem(0).Property(OnMediaReady),True) + !String.IsEqual(Container(50).ListItem(0).Property(OnVideoSaver),True)">85</onup>
+                    </control>
+                    <control type="image">
+                        <visible>Control.HasFocus(86)</visible>
+                        <width>450</width>
+                        <height>60</height>
+                        <texture background="false">selection_frame.png</texture>
+                    </control>
+                </control>
+            </control>
+        </control>
+        <control type="label">
+            <description>
+                Sub-Items Count for Clicked Button
+            </description>
+            <visible>!String.IsEmpty(Window.Property(OpenedMenuId))</visible>
+            <left>530</left>
+            <top>352</top>
+            <width>50</width>
+            <height>30</height>
+            <align>right</align>
+            <aligny>center</aligny>
+            <scroll>false</scroll>
+            <label>[I]$INFO[Window.Property(SubListSize)][/I]</label>
+            <font>font13</font>
+            <textcolor>CDFFFFFF</textcolor>
+            <wrapmultiline>false</wrapmultiline>
+        </control>
+    </controls>
+</window>

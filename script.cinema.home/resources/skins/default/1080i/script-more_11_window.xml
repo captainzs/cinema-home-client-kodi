@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+    <controls>
+        <control type="group">
+            <description>
+                Main grid-like panel for listing all the grouped videos
+                Shall load videos dynamically
+                Shall be vertical scrollable
+                Shall be configurable for the number of columns
+            </description>
+            <control type="panel" id="200">
+                <description>
+                    Size calculations:
+                    FIX: screen width (SW), column no. (CN)
+                    panel.height = SHALL NOT BE SET
+                    item-layout.width = FLOOR(SW / CN)
+                    item.width = item-layout.width - item.border.left - item.border.right
+                    item.height = ROUND(item.width * 1.4725)
+                    item-layout.height = item.height + item.border.top + item.border.bottom
+                    panel.left = [SW - (CN * item-layout.width)]/2
+                    panel.top = header.height
+                </description>
+                <preloaditems>100</preloaditems>
+                <left>3</left>
+                <top>80</top>
+                <width>100%</width>
+                <pagecontrol>60</pagecontrol>
+                <onup>Noop</onup>
+                <ondown>Noop</ondown>
+                <itemlayout width="174" height="255">
+                    <control type="image">
+                        <left>0</left>
+                        <top>0</top>
+                        <width>172</width>
+                        <height>253</height>
+                        <texture background="false" border="0">$INFO[ListItem.Art(poster)]</texture>
+                        <bordertexture border="1" colordiffuse="FF000000">white.bmp</bordertexture>
+                        <bordersize>1</bordersize>
+                    </control>
+                </itemlayout>
+                <focusedlayout width="174" height="255">
+                    <control type="image">
+                        <left>0</left>
+                        <top>0</top>
+                        <width>173</width>
+                        <height>253</height>
+                        <texture background="false" border="0" colordiffuse="33FFFFFF">$INFO[ListItem.Art(poster)]</texture>
+                        <bordertexture border="1" colordiffuse="FFCBE354">white.bmp</bordertexture>
+                        <bordersize>1</bordersize>
+                    </control>
+                    <control type="textbox">
+                        <description>
+                            Height: round(image.height * 0.7476)
+                        </description>
+                        <left>0</left>
+                        <top>0</top>
+                        <width>173</width>
+                        <height>189</height>
+                        <align>center</align>
+                        <aligny>center</aligny>
+                        <font>font10</font>
+                        <textcolor>FF000000</textcolor>
+                        <autoscroll>true</autoscroll>
+                        <label>[UPPERCASE][B]$INFO[ListItem.Title][/B][/UPPERCASE][CR]$INFO[ListItem.Year]</label>
+                    </control>
+                    <control type="label">
+                        <left>0</left>
+                        <top>160</top>
+                        <width>173</width>
+                        <height>10</height>
+                        <align>center</align>
+                        <aligny>center</aligny>
+                        <scroll>false</scroll>
+                        <font>font10</font>
+                        <textcolor>FF000000</textcolor>
+                        <shadowcolor>00000000</shadowcolor>
+                        <wrapmultiline>false</wrapmultiline>
+                        <label>[B]$INFO[ListItem.Rating(averaged)][/B]</label>
+                    </control>
+                </focusedlayout>
+            </control>
+            <control type="scrollbar" id="60">
+                <visible>Control.IsVisible(200)</visible>
+                <orientation>vertical</orientation>
+                <left>1900</left>
+                <top>80</top>
+                <width>20</width>
+                <texturesliderbar border="2,16,2,16">scroll_bar.png</texturesliderbar>
+                <showonepage>true</showonepage>
+            </control>
+            <control type="image">
+                <description>
+                    Diffused Header background
+                </description>
+                <left>0</left>
+                <top>80</top>
+                <width>100%</width>
+                <height>30</height>
+                <texture background="false" colordiffuse="FF000000">diffuse_header.png</texture>
+            </control>
+            <control type="label">
+                <left>0</left>
+                <top>0</top>
+                <width>100%</width>
+                <height>90</height>
+                <align>center</align>
+                <aligny>center</aligny>
+                <scroll>false</scroll>
+                <font>font14_bold</font>
+                <textcolor>FFFFFFFF</textcolor>
+                <shadowcolor>00000000</shadowcolor>
+                <wrapmultiline>false</wrapmultiline>
+                <label>$INFO[Window.Property(MediaSetName)]</label>
+            </control>
+            <control type="label">
+                <animation type="Conditional" condition="true" pulse="true" reversible="false">
+                    <effect type="fade" start="100" end="0" time="5000"/>
+                </animation>
+                <left>0</left>
+                <top>0</top>
+                <width>100%</width>
+                <height>90</height>
+                <align>center</align>
+                <aligny>center</aligny>
+                <scroll>false</scroll>
+                <font>font14_bold</font>
+                <textcolor>FFCBE354</textcolor>
+                <wrapmultiline>false</wrapmultiline>
+                <label>$INFO[Window.Property(MediaSetName)]</label>
+            </control>
+        </control>
+    </controls>
+</window>
