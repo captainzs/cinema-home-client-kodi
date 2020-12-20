@@ -23,38 +23,35 @@ class TorrentsDialog(xbmcgui.WindowXMLDialog, Window):
     def __init__(self, *args, **kwargs):
         xbmcgui.WindowXMLDialog.__init__(self, args[0], args[1], args[2], args[3])
         Window.__init__(self)
-        self._torrents = kwargs['torrents']
-        self._selected_index = None
+        self.__torrents = kwargs['torrents']
+        self.__selected_index = None
         return
 
     def doModal(self):
         self.setProperty(TorrentsDialog.XML_PROP_MEDIA_LABEL, "All")
-        self._do_modal()
-        return
+        return self._do_modal()
 
     # noinspection PyPep8Naming
     def doModalSeason(self, season):
         self.setProperty(TorrentsDialog.XML_PROP_MEDIA_LABEL, "Season {}".format(season.get_season_no()))
-        self._do_modal()
-        return
+        return self._do_modal()
 
     # noinspection PyPep8Naming
     def doModalEpisode(self, episode):
         self.setProperty(TorrentsDialog.XML_PROP_MEDIA_LABEL, "Episode {}".format(episode.get_episode_number()))
-        self._do_modal()
-        return
+        return self._do_modal()
 
     def _do_modal(self):
-        if self._torrents is None or len(self._torrents) == 0:
+        if self.__torrents is None or len(self.__torrents) == 0:
             xbmcgui.Dialog().ok(addon.ADDON.getLocalizedString(30005), addon.ADDON.getLocalizedString(30012))
             return
         self._selected_index = 0
         xbmcgui.WindowXMLDialog.doModal(self)
-        return
+        return self.__torrents[self.__selected_index] if self.__selected_index is not None else None
 
     def onInit(self):
         lst = self.getControlList(TorrentsDialog.XML_ID_LIST)
-        lst.addItems([t.to_list_item() for t in self._torrents])
+        lst.addItems([t.to_list_item() for t in self.__torrents])
         self.setFocusId(TorrentsDialog.XML_ID_BTN_CANCEL)
         return
 
@@ -65,10 +62,11 @@ class TorrentsDialog(xbmcgui.WindowXMLDialog, Window):
                 self.clearProperty(TorrentsDialog.XML_PROP_ON_RELEASES)
                 self.setFocusId(TorrentsDialog.XML_ID_BTN_RELEASES)
             else:
+                self.__selected_index = None
                 self.close()
         elif action.getId() == xbmcgui.ACTION_SELECT_ITEM:
             if self.getFocusId() == TorrentsDialog.XML_ID_LIST:
-                self._selected_index = self.getControlList(TorrentsDialog.XML_ID_LIST).getSelectedPosition()
+                self.__selected_index = self.getControlList(TorrentsDialog.XML_ID_LIST).getSelectedPosition()
                 self.clearProperty(TorrentsDialog.XML_PROP_ON_RELEASES)
                 self.setFocusId(TorrentsDialog.XML_ID_BTN_DOWNLOAD)
         return
@@ -76,9 +74,12 @@ class TorrentsDialog(xbmcgui.WindowXMLDialog, Window):
     def onClick(self, control_id):
         if control_id == TorrentsDialog.XML_ID_BTN_RELEASES:
             self.setFocusId(TorrentsDialog.XML_ID_LIST)
+        elif control_id == TorrentsDialog.XML_ID_BTN_DOWNLOAD:
+            self.__selected_index = self.getControlList(TorrentsDialog.XML_ID_LIST).getSelectedPosition()
+            self.close()
         return
 
     def size(self):
-        if self._torrents is None:
+        if self.__torrents is None:
             return 0
-        return len(self._torrents)
+        return len(self.__torrents)

@@ -40,14 +40,14 @@ class DetailsWindow(xbmcgui.WindowXML, Window):
     def get_instance(cls):
         return DetailsWindow('script-details_window.xml', addon.ADDON_PATH, 'default', '1080i', True,
                              player=xbmc.Player(),
-                             client__service=ClientService.get_instance(),
+                             client_service=ClientService.get_instance(),
                              loading_dialog=LoadingDialog.get_instance())
 
     def __init__(self, *args, **kwargs):
         xbmcgui.WindowXML.__init__(self, args[0], args[1], args[2], args[3], args[4])
         Window.__init__(self)
         self._player = kwargs["player"]
-        self.__service = kwargs["client__service"]
+        self.__service = kwargs["client_service"]
 
         self.__media = None
         self._dynamic_data = None
@@ -136,7 +136,9 @@ class DetailsWindow(xbmcgui.WindowXML, Window):
             movie_w_torrents = self.__loader.load(10, self.__service.request_movie_torrents, self.__media.get_imdb_id())
             self._torrents_dialog = TorrentsDialog.get_instance(movie_w_torrents.get_torrents())
         self.setProperty(DetailsWindow.XML_SUB_LIST_SIZE, str(self._torrents_dialog.size()))
-        self._torrents_dialog.doModal()
+        selected = self._torrents_dialog.doModal()
+        if selected is not None:
+            self.__service.request_download_movie(selected.get_id())
         return
 
     def _on_download_show(self):

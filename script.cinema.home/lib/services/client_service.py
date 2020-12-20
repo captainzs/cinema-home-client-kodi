@@ -88,3 +88,17 @@ class ClientService:
         if response is None:
             return None
         return DynamicData(response.json())
+
+    def request_download_movie(self, torrent_id):
+        path = "/api/client/movie/release/{}".format(torrent_id)
+        self.__request(path)
+        return
+
+    def request_download_show(self, torrent_id, season_no=None, episode_no=None):
+        path = "/api/client/show/release/{}".format(torrent_id)
+        if season_no is not None and episode_no is not None:
+            path = "{}?seasonNo={}&episodeNo={}".format(path, season_no, episode_no)
+        elif season_no is not None:
+            path = "{}?seasonNo={}".format(path, season_no)
+        self.__request(path)
+        return

@@ -1,6 +1,7 @@
 import xbmcgui
 from lib import addon
 from lib.models.season_info import Season
+from lib.services.client_service import ClientService
 from lib.utils.logger import Logger
 from lib.utils.override import override
 from lib.viewmodels.torrents_dialog import TorrentsDialog
@@ -17,13 +18,15 @@ class EpisodesDialog(xbmcgui.WindowXMLDialog, Window):
     @classmethod
     def get_instance(cls, season):
         return EpisodesDialog('script-episodes_dialog.xml', addon.ADDON_PATH, 'default', '1080i',
-                              season=season)
+                              season=season,
+                              client_service=ClientService.get_instance())
 
     def __init__(self, *args, **kwargs):
         xbmcgui.WindowXMLDialog.__init__(self, args[0], args[1], args[2], args[3])
         Window.__init__(self)
         self.__season = kwargs['season']  # type: Season
         self.__episodes = self.__season.get_episodes()
+        self.__service = kwargs['client_service']  # type: ClientService
         return
 
     def onInit(self):
@@ -84,7 +87,9 @@ class EpisodesDialog(xbmcgui.WindowXMLDialog, Window):
             xbmcgui.Dialog().ok(addon.ADDON.getLocalizedString(30005), addon.ADDON.getLocalizedString(30006))
             return
         dialog = TorrentsDialog.get_instance(self.__season.get_download_torrents())
-        dialog.doModalSeason(self.__season)
+        torrent = dialog.doModalSeason(self.__season)
+        self.__service.request_download_show(torrent.get_id(),
+                                             season_no=self.__season.get_season_no())
         del dialog
         return
 
@@ -94,7 +99,10 @@ class EpisodesDialog(xbmcgui.WindowXMLDialog, Window):
             xbmcgui.Dialog().ok(addon.ADDON.getLocalizedString(30005), addon.ADDON.getLocalizedString(30007))
             return
         dialog = TorrentsDialog.get_instance(episode.get_download_torrents())
-        dialog.doModalEpisode(episode)
+        torrent = dialog.doModalEpisode(episode)
+        self.__service.request_download_show(torrent.get_id(),
+                                             season_no=self.__season.get_season_no(),
+                                             episode_no=episode.get_episode_number())
         del dialog
         return
 
