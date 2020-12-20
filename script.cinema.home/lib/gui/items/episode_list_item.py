@@ -1,4 +1,5 @@
 import xbmcgui
+from lib.services import file_downloader
 from lib.utils.logger import Logger
 
 
@@ -29,13 +30,13 @@ class EpisodeListItem(xbmcgui.ListItem):
             self.setRating("averaged", rating)
         aired = episode.get_air_date()
         if aired:
-            self.setProperty("Aired", aired)
+            self.setProperty("Aired", str(aired))
         self.setProperty("IsDownloadable", str(episode.is_downloadable()))
 
-        still = try_download_one(episode.get_stills())
+        still = file_downloader.try_download_one(episode.get_stills())
         if still:
             self.setArt({'thumb': still.get_path()})
-        poster = try_download_one(episode.get_posters())
+        poster = file_downloader.try_download_one(episode.get_posters())
         if poster:
             self.setArt({'poster': poster.get_path()})
         return

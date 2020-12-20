@@ -1,6 +1,7 @@
 import xbmc
 import xbmcgui
 from lib import addon
+from lib.services import file_downloader
 from lib.utils.logger import Logger
 
 
@@ -42,7 +43,7 @@ class SeasonListItem(xbmcgui.ListItem):
             self.setProperty("EpisodesCount", str(episodes_count))
         self.setProperty("IsAvailable", str(season.is_available()))
 
-        poster = try_download_one(season.get_posters())
+        poster = file_downloader.try_download_one(season.get_posters())
         if poster:
             self.setArt({'poster': poster.get_path()})
         return
