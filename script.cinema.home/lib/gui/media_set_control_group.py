@@ -2,7 +2,7 @@ from control_item_group import ControlItemGroup
 from control_list import ControlList
 from definitions import Orientation, ScrollStop, Vector
 from item_layout import ItemLayout
-from lib.gui.items.media_set_list_item import MediaSetListItem
+from lib.gui.items.media_set_list_item import MediaSetPageListItem
 from lib.gui.media_control_group import MediaControlGroup
 from lib.utils.logger import Logger
 from lib.utils.override import override
@@ -32,7 +32,7 @@ class MediaSetControlGroup(ControlItemGroup):
 
     @override
     def _on_new_render(self, new_item):
-        # type: (MediaSetListItem) -> None
+        # type: (MediaSetPageListItem) -> None
         self._controls[1].reset()
         self._controls[0].setLabel("")
         if new_item is not None:

@@ -2,7 +2,7 @@
 <window type="dialog">
     <controls>
         <control type="button" id="99">
-            <visible>String.IsEqual(Window.Property(IsListFocused),True)</visible>
+            <visible>!Control.HasFocus(34) + !Control.HasFocus(35) + !Control.HasFocus(36) + !Control.HasFocus(37)</visible>
             <left>1818</left>
             <top>733</top>
             <width>81</width>

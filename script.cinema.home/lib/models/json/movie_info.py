@@ -1,7 +1,7 @@
 import xbmc
 from lib.gui.items.movie_list_item import MovieListItem
-from lib.models.media_info import MediaNfo
-from lib.models.torrent_info import Torrent
+from lib.models.json.media_info import MediaNfo
+from lib.models.json.torrent_info import Torrent
 from lib.models.types.media_type import MediaType, MediaLevel
 from lib.utils import lst_sorter
 from lib.utils.logger import Logger

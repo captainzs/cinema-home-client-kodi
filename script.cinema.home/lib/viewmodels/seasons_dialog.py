@@ -1,6 +1,6 @@
 import xbmcgui
 from lib import addon
-from lib.models.show_info import ShowNfo
+from lib.models.json.show_info import ShowNfo
 from lib.utils.logger import Logger
 from lib.utils.override import override
 from lib.viewmodels.episodes_dialog import EpisodesDialog

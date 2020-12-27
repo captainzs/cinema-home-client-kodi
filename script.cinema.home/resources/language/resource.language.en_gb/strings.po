@@ -108,3 +108,7 @@ msgstr "Cancel"
 msgctxt "#30025"
 msgid "Try again!"
 msgstr "Try again!"
+
+msgctxt "#30026"
+msgid "Enter the title you looking for!"
+msgstr "Enter the title you looking for!"

@@ -1,11 +1,11 @@
 from abc import abstractmethod
 
 import xbmc
-from lib.models.collection_info import Collection
-from lib.models.image_info import Image
+from lib.models.json.collection_info import Collection
+from lib.models.json.image_info import Image
+from lib.models.json.video_info import Video
 from lib.models.types.genres import Genre
 from lib.models.types.networks import Network
-from lib.models.video_info import Video
 from lib.utils import lst_sorter
 from lib.utils.logger import Logger
 

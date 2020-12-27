@@ -1,6 +1,7 @@
-from lib.models.movie_info import MovieNfo
-from lib.models.show_info import ShowNfo
+from lib.models.json.movie_info import MovieNfo
+from lib.models.json.show_info import ShowNfo
 from lib.models.types.media_type import MediaType
+from lib.utils.logger import Logger
 
 
 def singleton(cls, *args, **kw):
@@ -16,12 +17,14 @@ def singleton(cls, *args, **kw):
 
 @singleton
 class MediaStorage:
+    __logger = Logger.get_instance(__name__)
+
     def __init__(self):
         self._media_2_id = {}
         return
 
     def cache(self, media):
-        current = self._media_2_id.get(media.get_imdb_id())
+        current = self._media_2_id.get(media.get_imdb_id(), None)
         if current is None:
             current = media
         else:

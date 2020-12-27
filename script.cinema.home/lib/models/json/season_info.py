@@ -1,8 +1,8 @@
 import xbmc
 from lib.gui.items.season_list_item import SeasonListItem
-from lib.models.episode_info import Episode
-from lib.models.image_info import Image
-from lib.models.torrent_info import Torrent
+from lib.models.json.episode_info import Episode
+from lib.models.json.image_info import Image
+from lib.models.json.torrent_info import Torrent
 from lib.utils import lst_sorter
 
 

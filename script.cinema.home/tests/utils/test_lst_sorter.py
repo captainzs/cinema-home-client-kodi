@@ -1,7 +1,7 @@
 import sys
 import unittest
 
-from lib.models.image_info import Image
+from lib.models.json.image_info import Image
 from lib.utils import lst_sorter
 
 if sys.version_info >= (3, 3):

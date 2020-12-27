@@ -1,8 +1,8 @@
 from lib.gui.items.show_list_item import ShowListItem
-from lib.models.episode_info import Episode
-from lib.models.media_info import MediaNfo
-from lib.models.season_info import Season
-from lib.models.torrent_info import Torrent
+from lib.models.json.episode_info import Episode
+from lib.models.json.media_info import MediaNfo
+from lib.models.json.season_info import Season
+from lib.models.json.torrent_info import Torrent
 from lib.models.types.media_type import MediaType, MediaLevel
 from lib.utils import lst_sorter, tagliner
 from lib.utils.logger import Logger

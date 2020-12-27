@@ -2,9 +2,9 @@ import requests
 
 import xbmc
 import xbmcgui
-from lib.models.dynamic_data import DynamicData
-from lib.models.movie_info import MovieNfo
-from lib.models.show_info import ShowNfo
+from lib.models.json.dynamic_data import DynamicData
+from lib.models.json.movie_info import MovieNfo
+from lib.models.json.show_info import ShowNfo
 from lib.models.types.media_type import MediaType, MediaLevel
 from lib.services.media_storage import MediaStorage
 from lib.utils.logger import Logger

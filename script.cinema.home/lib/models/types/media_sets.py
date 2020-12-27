@@ -239,3 +239,32 @@ class Collection(MediaSet):
     @override
     def get_body(self):
         return None
+
+
+class Search(MediaSet):
+    @classmethod
+    def movies(cls, query):
+        return Search(MediaType.MOVIE, query)
+
+    @classmethod
+    def shows(cls, query):
+        return Search(MediaType.SHOW, query)
+
+    def __init__(self, media_type, query):
+        MediaSet.__init__(self, media_type)
+        self.__query = query
+        return
+
+    @override
+    def get_name(self):
+        name_part = "Movies" if self._media_type == MediaType.MOVIE else "TV Shows"
+        return "{} for '{}'".format(name_part, self.__query)
+
+    @override
+    def get_path(self, page):
+        path_segment = "movies" if self._media_type == MediaType.MOVIE else "shows"
+        return "/api/client/search/{}?page={}".format(path_segment, page)
+
+    @override
+    def get_body(self):
+        return {"subText": self.__query, "sortBy": "POPULARITY", "sortOrder": "DESCENDING"}

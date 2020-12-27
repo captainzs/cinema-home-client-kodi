@@ -129,9 +129,4 @@ class MoreWindow(xbmcgui.WindowXML, Window):
     def __load_page_items(self, page_no):
         if page_no is None:
             return None
-        page = self.__mset.page(page_no)
-        if page is None:
-            unfiltered_new_page = self.__service.request_lst(self.__mset.get_path(page_no), self.__mset.get_body(),
-                                                             self.__mset.get_media_type())
-            page = self.__mset.extend(page_no, unfiltered_new_page)
-        return [media.to_list_item() for media in page]
+        return [media.to_list_item() for media in self.__mset.page(page_no)]

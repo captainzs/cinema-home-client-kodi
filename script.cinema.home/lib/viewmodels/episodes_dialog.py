@@ -1,6 +1,6 @@
 import xbmcgui
 from lib import addon
-from lib.models.season_info import Season
+from lib.models.json.season_info import Season
 from lib.services.client_service import ClientService
 from lib.utils.logger import Logger
 from lib.utils.override import override

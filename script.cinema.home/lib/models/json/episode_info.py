@@ -2,8 +2,8 @@ import datetime
 
 import xbmc
 from lib.gui.items.episode_list_item import EpisodeListItem
-from lib.models.image_info import Image
-from lib.models.torrent_info import Torrent
+from lib.models.json.image_info import Image
+from lib.models.json.torrent_info import Torrent
 from lib.utils import lst_sorter
 
 
